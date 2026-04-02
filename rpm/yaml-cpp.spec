@@ -1,14 +1,12 @@
 Name:           yaml-cpp
-Version:        0.8.0
+Version:        0.9.0
 Release:        1
 Summary:        A YAML parser and emitter for C++
 License:        MIT 
 URL:            https://github.com/sailfishos/yaml-cpp
 Source0:        %{name}-%{version}.tar.gz
 
-Patch0:         0001-Specify-CMake-policy-range-to-avoid-deprecation-warn.patch
-
-BuildRequires:  cmake gcc gcc-c++
+BuildRequires:  cmake
 
 %description
 yaml-cpp is a YAML parser and emitter in C++ written around the YAML 1.2 spec.
@@ -54,4 +52,3 @@ developing applications that use %{name}.
 %{_libdir}/*.so
 %{_libdir}/cmake/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
-
