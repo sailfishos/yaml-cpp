@@ -6,7 +6,19 @@ License:        MIT
 URL:            https://github.com/sailfishos/yaml-cpp
 Source0:        %{name}-%{version}.tar.gz
 
-Patch0:         0001-Specify-CMake-policy-range-to-avoid-deprecation-warn.patch
+# When updating yaml-cpp so that the .so version changes,
+# provide libyamp-cpp.so.0.N while building libyaml-cpp.so.0.N+1
+# This can be disabled after the update has been completed.
+%define yaml_compat 1
+
+%if 0%{?yaml_compat:%yaml_compat}
+%define old_so_version 8
+%ifarch aarch64 x86-64
+BuildRequires: libyaml-cpp.so.0.%{old_so_version}()(64bit)
+%else
+BuildRequires: libyaml-cpp.so.0.%{old_so_version}
+%endif
+%endif
 
 BuildRequires:  cmake
 
@@ -38,6 +50,10 @@ developing applications that use %{name}.
 
 %install
 %cmake_install
+
+%if %{yaml_compat}
+cp -av %{_libdir}/libyaml-cpp.so.0.%{old_so_version}* $RPM_BUILD_ROOT%{_libdir}/
+%endif
 
 %post -p /sbin/ldconfig
 
