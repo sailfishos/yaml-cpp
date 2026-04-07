@@ -1,7 +1,7 @@
 %define library_name libyaml-cpp0_9
 
 Name:           yaml-cpp
-Version:        0.9.0
+Version:        0.9.1
 Release:        1
 Summary:        A YAML parser and emitter for C++
 License:        MIT 
