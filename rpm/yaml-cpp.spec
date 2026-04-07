@@ -1,3 +1,5 @@
+%define library_name libyaml-cpp0_9
+
 Name:           yaml-cpp
 Version:        0.9.0
 Release:        1
@@ -6,17 +8,20 @@ License:        MIT
 URL:            https://github.com/sailfishos/yaml-cpp
 Source0:        %{name}-%{version}.tar.gz
 
-Patch0:         0001-Specify-CMake-policy-range-to-avoid-deprecation-warn.patch
-
 BuildRequires:  cmake
 
 %description
 yaml-cpp is a YAML parser and emitter in C++ written around the YAML 1.2 spec.
 
+%package -n %{library_name}
+Summary:        A YAML parser and emitter for C++
+
+%description -n %{library_name}
+yaml-cpp is a YAML parser and emitter in C++ written around the YAML 1.2 spec.
 
 %package        devel
 Summary:        Development files for %{name}
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{library_name} = %{version}
 
 %description    devel
 The %{name}-devel package contains libraries and header files for
@@ -39,12 +44,11 @@ developing applications that use %{name}.
 %install
 %cmake_install
 
-%post -p /sbin/ldconfig
+%post -n %{library_name} -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun -n %{library_name} -p /sbin/ldconfig
 
-
-%files
+%files -n %{library_name}
 %license LICENSE
 %{_libdir}/*.so.*
 
