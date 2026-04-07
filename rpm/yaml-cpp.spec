@@ -6,6 +6,8 @@ License:        MIT
 URL:            https://github.com/sailfishos/yaml-cpp
 Source0:        %{name}-%{version}.tar.gz
 
+Patch0:         0001-Specify-CMake-policy-range-to-avoid-deprecation-warn.patch
+
 BuildRequires:  cmake
 
 %description
